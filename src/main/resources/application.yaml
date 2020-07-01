@@ -1,0 +1,53 @@
+server:
+  port: ${Values.custom.server.port:8084}
+
+spring:
+  config:
+    name: codes
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${Values.global.datasource.host:localhost}:${Values.global.datasource.port:3306}/mydemo?serverTimezone=GMT&useSSL=true
+    username: ${Values.global.datasource.username:root}
+    password: ${Values.global.datasource.password:San5525.}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 20           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+      pool-name: DateSourceHikariCP     # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      connection-test-query: SELECT 1
+  redis:
+      database: ${Values.global.redis.database:0}
+      # Redis服务器地址    注意使用了环境变量时需要用双引号包裹
+      host: ${Values.global.redis.host:52.83.75.0}
+      # Redis服务器连接端口
+      port: ${Values.global.redis.port:6379}
+      # Redis服务器连接密码（默认为空）
+      password:
+      # 连接超时时间（毫秒）
+      timeout: 1000s
+      # 连接池最大连接数（使用负值表示没有限制）
+      jedis:
+        pool:
+          max-active: 100
+          # 连接池中的最大空闲连接
+          max-idle:   20
+          # 连接池最大阻塞等待时间(使用负值表示没有限制)，需要时间单位
+          max-wait:   60000ms
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ayla.message.push.entity
+  # 驼峰命名规范
+  configuration.map-underscore-to-camel-case: true
+
+logging:
+  level:
+    ROOT: ${Values.custom.logging.level.ROOT:INFO}
+    org.springframework: ${Values.custom.logging.level.org.springframework:ERROR}
+    com.ayla: ${Values.custom.logging.level.com.ayla:DEBUG}
+
+
+

@@ -1,0 +1,2 @@
+rootProject.name = 'demo'
+gradle.ext.nexusUrl = 'https://nexus.aylanetworks.com:8443/nexus'

@@ -1,0 +1,14 @@
+spring:
+  config:
+    name: ${spring.config.name:}
+
+logging:
+  level:
+    ROOT: ${application.logging.level.ROOT:INFO}
+    org.springframework: ${application.logging.level.org.springframework:ERROR}
+    com.ayla: ${application.logging.level.com.ayla:DEBUG}
+  
+server:
+  port: ${application.server.port:8083}
+
+
